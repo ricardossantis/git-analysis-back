@@ -15,6 +15,15 @@ const getUsers = async (since, per_page = 30) => {
   }
 }
 
+const getDetails = async (username) => {
+  try {
+    return octokit.request(`GET /users/${username}`);
+  } catch (error) {
+    console.log(`Error! Status: ${error.status}. Message: ${error.response.data.message}`)
+  }
+}
+
 module.exports = {
-  getUsers
+  getUsers,
+  getDetails
 }
