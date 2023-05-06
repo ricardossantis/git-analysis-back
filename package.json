@@ -1,0 +1,41 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend test",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ricardossantis/backend.git"
+  },
+  "author": "ricardo_santis",
+  "bugs": {
+    "url": "https://github.com/ricardossantis/backend/issues"
+  },
+  "homepage": "https://github.com/ricardossantis/backend#readme",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "tape tests/*test.js | tap-spec",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "mercedlogger": "^1.0.1",
+    "morgan": "^1.10.0",
+    "octokit": "^2.0.14",
+    "supertest": "^6.3.3",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.21",
+    "nodemon": "^2.0.22"
+  }
+}
