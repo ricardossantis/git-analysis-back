@@ -12,6 +12,7 @@ const getUsers = (since, per_page = 30) => {
     });
   } catch (error) {
     console.log(`Error! Status: ${error.status}. Message: ${error.response.data.message}`)
+    throw error
   }
 }
 
@@ -20,6 +21,7 @@ const getDetails = (username) => {
     return octokit.request(`GET /users/${username}`);
   } catch (error) {
     console.log(`Error! Status: ${error.status}. Message: ${error.response.data.message}`)
+    throw error
   }
 }
 
@@ -28,6 +30,7 @@ const getRepos = (username) => {
     return octokit.request(`GET /users/${username}/repos`);
   } catch (error) {
     console.log(`Error! Status: ${error.status}. Message: ${error.response.data.message}`)
+    throw error
   }
 }
 
