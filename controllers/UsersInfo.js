@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getUsers, getDetails } = require("../connectors/github")
+const { getUsers, getDetails, getRepos } = require("../connectors/github")
 const router = Router();
 
 router.get("/", async (req, res) => {
@@ -16,8 +16,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET - /api/users/:username/details
-//   This endpoint must return the details of a GitHub user
 router.get("/:username/details", async (req, res) => {
   const username = req.params.username;
   try {
@@ -28,10 +26,14 @@ router.get("/:username/details", async (req, res) => {
   }
 });
 
-// GET - /api/users/:username/repos
-//   This endpoint must return a list with all user repositories
-// router.get("/api/users/:username/repos", async (req, res) => {
-//   const username = req.params.username;
-// });
+router.get("/:username/repos", async (req, res) => {
+  const username = req.params.username;
+  try {
+    const { data } = await getRepos(username)
+    return res.json({ repos: data })
+  } catch (error) {
+    return res.status(400).json({ error })
+  }
+});
 
 module.exports = router;

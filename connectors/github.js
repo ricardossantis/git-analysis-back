@@ -4,7 +4,7 @@ const octokit = new Octokit({
   auth: process.env.TOKEN
 });
 
-const getUsers = async (since, per_page = 30) => {
+const getUsers = (since, per_page = 30) => {
   try {
     return octokit.request("GET /users", {
       since,
@@ -15,7 +15,7 @@ const getUsers = async (since, per_page = 30) => {
   }
 }
 
-const getDetails = async (username) => {
+const getDetails = (username) => {
   try {
     return octokit.request(`GET /users/${username}`);
   } catch (error) {
@@ -23,7 +23,16 @@ const getDetails = async (username) => {
   }
 }
 
+const getRepos = (username) => {
+  try {
+    return octokit.request(`GET /users/${username}/repos`);
+  } catch (error) {
+    console.log(`Error! Status: ${error.status}. Message: ${error.response.data.message}`)
+  }
+}
+
 module.exports = {
   getUsers,
-  getDetails
+  getDetails,
+  getRepos
 }

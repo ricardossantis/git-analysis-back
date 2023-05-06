@@ -36,3 +36,20 @@ test("Should get user details", (t) => {
       });
   });
 });
+
+test("Should list all user repos", (t) => {
+  const server = app.listen(0, () => {
+    const { port } = server.address();
+    supertest(`http://localhost:${port}`)
+      .get('/api/users/ricardossantis/repos')
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .end((err, res) => {
+        t.error(err, "No errors");
+        t.assert(Array.isArray(res.body.repos), "Response is an array");
+        t.assert(res.body.repos[0].name === "ricardossantis", "It's the right user");
+        server.close();
+        t.end();
+      });
+  });
+});
