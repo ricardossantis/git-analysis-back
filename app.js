@@ -3,7 +3,8 @@ const express = require("express")
 const morgan = require("morgan")
 const {log} = require("mercedlogger")
 const cors = require("cors")
-const UsersInfoRouter = require("./controllers/UsersInfo")
+const userInfoRouter = require("./controllers/usersGithub")
+const repoRouter = require("./controllers/repos")
 const rateLimit = require('express-rate-limit')
 const port =3000
 
@@ -22,7 +23,8 @@ const limiter = rateLimit({
 
 app.use(limiter)
 
-app.use("/api/users", UsersInfoRouter)
+app.use("/api/users", userInfoRouter)
+app.use("/api/repos", repoRouter)
 
 app.listen(port, () => log.green("SERVER STATUS", `Listening on port ${port}`))
 
